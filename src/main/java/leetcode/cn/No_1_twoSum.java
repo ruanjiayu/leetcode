@@ -22,14 +22,24 @@ public class No_1_twoSum {
         System.out.println(Arrays.toString(ints));
     }
 
-    public int[] twoSum(int[] nums, int target) {
-        Map<Integer, Integer> maps = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            if (maps.containsKey(target - nums[i])) {
-                return new int[]{maps.get(target - nums[i]), i};
-            }
 
-            maps.put(nums[i], i);
+    /**
+     * 1. 创建一个map。key为对应的值，value为对应的坐标
+     * 2. 循环数组，判断数组内是否符合对应的值。通过map.containsKey方法来判断是否含有对应的值。
+     * - 存在的情况下，直接返回
+     * - 不符合情况下，将值放入map，因为在循环数组，后期可能会使用到值
+     *
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(target - nums[i])) {
+                return new int[]{map.get(target - nums[i]), i};
+            }
+            map.put(nums[i], i);
         }
 
         return new int[2];
