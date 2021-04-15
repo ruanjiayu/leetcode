@@ -16,14 +16,14 @@ public class numberSum {
 
     @Test
     public void test() {
-        int[] nums = new int[]{0, 0, 0};
-        System.out.println(nSum(nums, 0, 3));
+        int[] nums = new int[]{-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        System.out.println(nSum(nums, 24, 7));
     }
 
     /**
      * @param nums   数组
      * @param target 目标值
-     * @param num 几个数字之和
+     * @param num    几个数字之和
      * @return
      */
     public List<List<Integer>> nSum(int[] nums, int target, int num) {// 总时间复杂度：O(n^3)
@@ -35,7 +35,7 @@ public class numberSum {
         // O(nlogn) 为了排除相同数据
         Arrays.sort(nums);
 
-        nSum(nums, target, num, new ArrayList<>(), result);
+        nSum(nums, target, num, new ArrayList<>(), result, 0);
         return result;
     }
 
@@ -47,10 +47,10 @@ public class numberSum {
      * @param result
      * @return
      */
-    public List<List<Integer>> nSum(int[] nums, int target, int num, List<Integer> tranList, List<List<Integer>> result) {
+    public List<List<Integer>> nSum(int[] nums, int target, int num, List<Integer> tranList, List<List<Integer>> result, int beforeBase) {
         if (num == 3) {
-            for (int i = num + 1; i < nums.length - 2; i++) {
-                if (i > (num + 1) && nums[i] == nums[i - 1]) {
+            for (int i = beforeBase; i < nums.length - 2; i++) {
+                if (i > beforeBase && nums[i] == nums[i - 1]) {
                     continue; // 去掉重复情况
                 }
                 int temTarget = target - nums[i];
@@ -59,6 +59,7 @@ public class numberSum {
                     // 当符合条件的时候
                     if (nums[left] + nums[right] == temTarget) {
                         ArrayList<Integer> valList = new ArrayList<>();
+
                         valList.addAll(tranList);
                         valList.add(nums[i]);
                         valList.add(nums[left]);
@@ -85,7 +86,8 @@ public class numberSum {
                 }
             }
         } else {
-            for (int i = tranList.size(); i < nums.length - num; i++) {
+            int base = tranList.size();
+            for (int i = beforeBase; i < nums.length - num + 1; i++) {
 
                 int n = num - 1;
 
@@ -102,15 +104,11 @@ public class numberSum {
                     continue;
                 }
 
-                target = target - nums[i];
+                int afterTarget = target - nums[i];
 
-                if (i == 0) {
-                    tranList.add(nums[i]);
-                } else {
-                    tranList.remove(i - 1);
-                    tranList.add(nums[i]);
-                }
-                nSum(nums, target, n, tranList, result);
+                tranList = tranList.subList(0, base);
+                tranList.add(nums[i]);
+                nSum(nums, afterTarget, n, tranList, result, i + 1);
             }
         }
 
