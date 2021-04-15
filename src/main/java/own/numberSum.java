@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @Description: n数字求和, 要求不重复。leetode相关题型
+ * @Description: n数字求和, 要求不重复。leetode相关题型为1、15、18
  * @Author: Summer
  * @DateTime: 2021/4/15 4:35 下午
  * @Version: 0.0.1-SNAPSHOT
@@ -23,7 +23,7 @@ public class numberSum {
     /**
      * @param nums   数组
      * @param target 目标值
-     * @param num    几个数字之和
+     * @param num    几个数字
      * @return
      */
     public List<List<Integer>> nSum(int[] nums, int target, int num) {// 总时间复杂度：O(n^3)
@@ -40,11 +40,11 @@ public class numberSum {
     }
 
     /**
-     * @param nums
-     * @param target
-     * @param num
-     * @param tranList
-     * @param result
+     * @param nums 数组
+     * @param target 目标值
+     * @param num 几个数字
+     * @param tranList 临时存储的目标值
+     * @param result 需要的目标值
      * @return
      */
     public List<List<Integer>> nSum(int[] nums, int target, int num, List<Integer> tranList, List<List<Integer>> result, int beforeBase) {
@@ -95,11 +95,11 @@ public class numberSum {
                     continue;
                 }
 
-                // 优化。数组内最小的4数之和一定要小于target
+                // 优化。数组内最小的数之和一定要小于target
                 if (nums[i] + n * nums[i + 1] > target) {
                     continue;
                 }
-                // 优化。数组内最小的4数之和一定要大于target
+                // 优化。数组内最大的数之和一定要大于target
                 if (nums[i] + n * nums[nums.length - 1] < target) {
                     continue;
                 }
