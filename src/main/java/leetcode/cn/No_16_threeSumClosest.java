@@ -20,6 +20,16 @@ public class No_16_threeSumClosest {
     }
 
 
+    /**
+     * 1. 获取基准值b，首先采用获取前三个数字
+     * 2. 采用左右指针的思路,将三数字之和a于目标值进行比较获取偏移量，将基准值调整为偏移量小的三数之和
+     *  - 目标值小于a,将右指针向前移动
+     *  - 目标值大于a,将左指着向后移动
+     *  - 等于目标值，那么就直接返回
+     * @param nums
+     * @param target
+     * @return
+     */
     public int threeSumClosest(int[] nums, int target) {
 
         if (nums == null || nums.length < 3) {
@@ -27,31 +37,26 @@ public class No_16_threeSumClosest {
         }
 
         Arrays.sort(nums);
-        int result = 200000;
-        for (int i = 0; i < nums.length - 1; ++i) {
-            int left = i + 1, right = nums.length - 1;
-            int tem = target - nums[i];
+        int closestNum = nums[0] + nums[1] + nums[2];
+        for (int first = 0; first < nums.length - 1; ++first) {
+            int left = first + 1, right = nums.length - 1;
             while (left < right) {
-                int near = tem - nums[left] - nums[right];
-                if (near == 0) {
-                    return nums[i] + nums[left] + nums[right];
+                int threeSum = nums[first] + nums[left] + nums[right];
+                if (Math.abs(threeSum - target) < Math.abs(closestNum - target)) {
+                    closestNum = threeSum;
+                }
+                if (target < threeSum) {
+                    right--;
+                } else if (target > threeSum){
+                    left++;
                 } else {
-                    int a = Math.abs(near);
-                    int b = Math.abs(result);
-                    if (a < b) {
-                        result = near;
-                    }
-                    if (near < 0) {
-                        right--;
-                    } else {
-                        left++;
-                    }
+                    return target;
                 }
             }
 
         }
 
-        return target - result;
+        return closestNum;
     }
 
 }
