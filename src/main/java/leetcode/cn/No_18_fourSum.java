@@ -44,6 +44,15 @@ public class No_18_fourSum {
                 continue; // 去掉重复情况
             }
 
+            // 优化。数组内最小的4数之和一定要小于target
+            if (nums[first] + 3*nums[first + 1]> target) {
+                continue;
+            }
+            // 优化。数组内最小的4数之和一定要大于target
+            if (nums[first] + 3*nums[nums.length -1] < target) {
+                continue;
+            }
+
             for (int i = first + 1; i < nums.length - 2; i++) {
                 if (i > (first + 1) && nums[i] == nums[i - 1]) {
                     continue; // 去掉重复情况
