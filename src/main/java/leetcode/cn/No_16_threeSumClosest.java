@@ -38,7 +38,7 @@ public class No_16_threeSumClosest {
 
         Arrays.sort(nums);
         int closestNum = nums[0] + nums[1] + nums[2];
-        for (int first = 0; first < nums.length - 1; ++first) {
+        for (int first = 0; first < nums.length - 2; ++first) {
             int left = first + 1, right = nums.length - 1;
             while (left < right) {
                 int threeSum = nums[first] + nums[left] + nums[right];
