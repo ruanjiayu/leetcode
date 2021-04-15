@@ -17,8 +17,8 @@ public class No_18_fourSum {
     @Test
     public void test() {
         // {2, 2, 2, 2}
-        int[] nums = new int[]{1,-2,-5,-4,-3,3,3,5};
-        System.out.println(fourSum(nums, -11));
+        int[] nums = new int[]{0, 0, 0, 0};
+        System.out.println(fourSum(nums, 0));
     }
 
 
@@ -30,7 +30,7 @@ public class No_18_fourSum {
      */
     public List<List<Integer>> fourSum(int[] nums, int target) {// 总时间复杂度：O(n^3)
         List<List<Integer>> ans = new ArrayList<>();
-        if (nums == null || nums.length <= 2) {
+        if (nums == null || nums.length < 4) {
             return ans;
         }
 
