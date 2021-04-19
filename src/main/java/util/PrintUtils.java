@@ -1,6 +1,9 @@
 package util;
 
+import basedata.ListNode;
+
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * @Description: 打印信息
@@ -49,5 +52,14 @@ public class PrintUtils {
 
     public static void print(boolean[] nums) {
         System.out.println(Arrays.toString(nums));
+    }
+
+    public static void print(ListNode node) {
+        if (Objects.nonNull(node)) {
+            System.out.print(node.val + "->");
+            print(node.next);
+        }else {
+            System.out.print("null");
+        }
     }
 }
