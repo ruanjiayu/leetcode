@@ -45,4 +45,24 @@ public class No_206_reverseList {
         }
         return prev;
     }
+
+
+    /**
+     * 递归解决链表反转
+     * https://leetcode-cn.com/problems/reverse-linked-list/solution/dong-hua-yan-shi-206-fan-zhuan-lian-biao-by-user74/
+     *
+     * @param head
+     * @return
+     */
+    public ListNode reverseList2(ListNode head) {
+        if (head.next == null || head == null) {
+            return head;
+        }
+        ListNode newHead = reverseList2(head.next);
+        // 此处的作用是形成一个环，即形成 1->2—>3->4->5->4的环
+        head.next.next = head;
+        // 即变成 1->2->3->4->null, 5->4->null;
+        head.next = null;
+        return newHead;
+    }
 }

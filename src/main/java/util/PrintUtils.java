@@ -59,7 +59,7 @@ public class PrintUtils {
             System.out.print(node.val + "->");
             print(node.next);
         }else {
-            System.out.print("null");
+            System.out.println("null");
         }
     }
 }
