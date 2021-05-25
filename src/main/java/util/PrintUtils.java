@@ -1,5 +1,6 @@
 package util;
 
+import basedata.DLinkedNode;
 import basedata.ListNode;
 
 import java.util.Arrays;
@@ -58,7 +59,27 @@ public class PrintUtils {
         if (Objects.nonNull(node)) {
             System.out.print(node.val + "->");
             print(node.next);
-        }else {
+        } else {
+            System.out.println("null");
+        }
+    }
+
+    public static void print(DLinkedNode node) {
+        if (Objects.nonNull(node)) {
+            if (node.prev == null) {
+                print(node.next);
+                return;
+            }
+            if (node.next == null) {
+                if (node.prev.prev == null) {
+                    System.out.println("空的链表");
+                }
+                System.out.println("null");
+                return;
+            }
+            System.out.print(node.value + "->");
+            print(node.next);
+        } else {
             System.out.println("null");
         }
     }
