@@ -71,7 +71,9 @@ public class Utils {
             buffer.append((char) (l + index));
         }
 
-        return buffer.toString();
+        String result = buffer.toString();
+        System.out.println("随机字符串：" + result);
+        return result;
     }
 
     public static TreeNode generateRandomBST(int maxLevel, int maxValue) {
